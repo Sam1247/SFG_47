@@ -51,20 +51,6 @@ public class Graph {
 
 
 	void findLoops (int s) {
-		if (currentLoop.contains(s)) {
-			for (int i = currentLoop.size()-1; i >= 0 && currentLoop.get(i) != s; i--) {
-				System.out.print(currentLoop.get(i) + " ");
-			}
-			return;
-		}
-		if (currentLoop.size() == 0) {
-			return;
-		}
-		currentLoop.add(s);
-		for (Node u: nodes[s]) {
-			findLoops(u.to);
-		}
-		currentLoop.remove(currentLoop.size()-1);
 
 	}
 
