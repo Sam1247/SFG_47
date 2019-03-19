@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Loop {
 	ArrayList<Integer> nodes = new ArrayList<>();
@@ -7,8 +6,23 @@ public class Loop {
 
 	public Loop(ArrayList<Integer> nodes) {
 		this.nodes = nodes;
+
+		if (nodes.size() == 2) {
+			for (int s: nodes) {
+				hashValue *= s + 1;
+			}
+			return;
+		}
+
+		int i = 0;
+
 		for (int s: nodes) {
-			hashValue *= s;
+			i++;
+			if (i%2 == 0) {
+				hashValue *= s + 1;
+			} else {
+				hashValue *= s + 2;
+			}
 		}
 	}
 

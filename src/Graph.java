@@ -68,6 +68,7 @@ public class Graph {
 			for (int i = currentLoop.size()-1; i >= 0 && currentLoop.get(i) != s; i--) {
 				nodes.add(currentLoop.get(i));
 			}
+			//nodes.add(s);
 			Loop loop = new Loop(nodes);
 			if (containLoop(loop)) {
 				return;
@@ -87,6 +88,7 @@ public class Graph {
 		findLoops(0);
 		for (Loop loop: loops) {
 			System.out.println(loop.nodes);
+			//System.out.println(loop.hashValue);
 		}
 	}
 
