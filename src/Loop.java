@@ -34,8 +34,8 @@ public class Loop {
 			}
 
 			for (int i = 1; i < this.nodes.size(); i++) {
-				index2 = (i + 1) % (loop.nodes.size());
-				if (this.nodes.get(index2) != loop.nodes.get(i)) {
+				index2 = ((index2 + 1) % (loop.nodes.size()));
+				if (this.nodes.get(i) != loop.nodes.get(index2)) {
 					return false;
 				}
 			}

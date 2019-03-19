@@ -25,13 +25,30 @@ public class Main {
 			graph.nodes[from].add(new Node(to, gain));
 		}
 
-		graph.printLoops();
+		//graph.printLoops();
+//		ArrayList  arrl = new ArrayList();
+//		arrl.add(1);
+//		arrl.add(3);
+//		arrl.add(2);
+//
+//		ArrayList  arrl2 = new ArrayList();
+//		arrl2.add(3);
+//		arrl2.add(2);
+//		arrl2.add(1);
+//
+//
+//
+//		Loop test = new Loop(arrl);
+//		Loop test2 = new Loop(arrl2);
+//
+//		System.out.println(test.isEqualTo(test2));
 
 		//ArrayList<ArrayList<Integer>> test = new ArrayList<ArrayList<Integer>>();
 
 
 		//test = graph.getforwardPathes();
 		//graph.findLoops(0);
+		graph.printLoops();
 
 //		for (int i = 0; i < test.size(); ++i) {
 //			for (int j= 0; j < test.get(i).size(); j++) {
