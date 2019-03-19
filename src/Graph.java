@@ -1,7 +1,6 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Stack;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Graph {
 
@@ -64,10 +63,11 @@ public class Graph {
 		if (currentLoop.contains(s)) {
 			// there is a loop
 			ArrayList<Integer> nodes = new ArrayList<>();
-			nodes.add(s);
 			for (int i = currentLoop.size()-1; i >= 0 && currentLoop.get(i) != s; i--) {
 				nodes.add(currentLoop.get(i));
 			}
+			nodes.add(s);
+			Collections.reverse(nodes);
 			//nodes.add(s);
 			Loop loop = new Loop(nodes);
 			if (containLoop(loop)) {
