@@ -60,7 +60,8 @@ public class Main {
 //
 
 
-		graph.printDelta();
+		//graph.printDelta();
+		System.out.println(graph.getBigDelta());
 
 
 

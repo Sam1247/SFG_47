@@ -137,17 +137,18 @@ public class Graph {
 		}
 	}
 
-	void printDelta () {
-		findLoops(0);
-		generateSubs(0, loops.size());
-		for (int delta: deltaArray) {
-			System.out.println(delta);
-		}
-	}
+//	void printDelta () {
+//		findLoops(0);
+//		generateSubs(0, loops.size());
+//		for (int delta: deltaArray) {
+//			System.out.println(delta);
+//		}
+//	}
 
 	int getBigDelta () {
 		findLoops(0);
 		generateSubs(0, loops.size());
+		Arrays.fill(deltaArray, 0);
 		int sum = 0;
 		for (int i = 2; i < 100; i++) {
 			if (i%2 == 0) {
@@ -158,6 +159,58 @@ public class Graph {
 		}
 		for (Loop loop: loops) {
 			sum -= loop.getGainFrom(nodes);
+		}
+		return 1+sum;
+	}
+
+	int getNunumerator () {
+		Arrays.fill(deltaArray, 0);
+		int sum = 0;
+		for (Path path: forwardPaths) {
+			// performing a deep copy of loops
+			ArrayList<Loop> loopsCopy = new ArrayList<>();
+			for (Loop loop: loops) {
+				ArrayList<Integer> arrayList = new ArrayList<>();
+				for (int i: loop.nodes) {
+					arrayList.add(i);
+				}
+				Loop lp = new Loop(arrayList);
+				loopsCopy.add(lp);
+			}
+
+			ArrayList<Integer> indxrm = new ArrayList<>();
+
+			for (int i = 0; i < loops.size(); ++i) {
+				for (int k: path.nodes) {
+					if (loops.get(i).nodes.contains(k)) {
+						indxrm.add(i);
+						break;
+					}
+				}
+			}
+
+			for (int i: indxrm) {
+				loops.remove(i);
+			}
+
+			sum += (getBigDelta())*path.getGainFrom(nodes);
+
+			// deleting loops
+
+			while (loops.size() > 0) {
+				loops.remove(0);
+			}
+
+			// restoring loops from loopsCopy
+
+			for (Loop loop: loopsCopy) {
+				ArrayList<Integer> arrayList = new ArrayList<>();
+				for (int i: loop.nodes) {
+					arrayList.add(i);
+				}
+				Loop lp = new Loop(arrayList);
+				loops.add(lp);
+			}
 		}
 		return sum;
 	}
