@@ -137,18 +137,10 @@ public class Graph {
 		}
 	}
 
-//	void printDelta () {
-//		findLoops(0);
-//		generateSubs(0, loops.size());
-//		for (int delta: deltaArray) {
-//			System.out.println(delta);
-//		}
-//	}
-
 	int getBigDelta () {
+		Arrays.fill(deltaArray, 0);
 		findLoops(0);
 		generateSubs(0, loops.size());
-		Arrays.fill(deltaArray, 0);
 		int sum = 0;
 		for (int i = 2; i < 100; i++) {
 			if (i%2 == 0) {
@@ -200,9 +192,7 @@ public class Graph {
 			while (loops.size() > 0) {
 				loops.remove(0);
 			}
-
 			// restoring loops from loopsCopy
-
 			for (Loop loop: loopsCopy) {
 				ArrayList<Integer> arrayList = new ArrayList<>();
 				for (int i: loop.nodes) {
