@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class Loop {
 	ArrayList<Integer> nodes = new ArrayList<>();
 	//int hashValue = 1;
-
 	public Loop(ArrayList<Integer> nodes) {
 		this.nodes = nodes;
 
@@ -24,6 +23,15 @@ public class Loop {
 //				hashValue *= s + 2;
 //			}
 //		}
+	}
+
+	int getGainFrom (ArrayList<Node>[] graphNodes) {
+		int gain = 0;
+		for (int i = 0; i < nodes.size()-1; i++) {
+			gain += graphNodes[nodes.get(i)].get(nodes.get(i+1)).gain;
+		}
+		gain += graphNodes[nodes.get(nodes.size()-1)].get(nodes.get(0)).gain;
+		return gain;
 	}
 
 	boolean isEqualTo (Loop loop) {

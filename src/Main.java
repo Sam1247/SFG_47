@@ -21,7 +21,7 @@ public class Main {
 			int from; int to; int gain;
 			from = scanner.nextInt();
 			to = scanner.nextInt();
-			gain = 1;
+			gain = scanner.nextInt();
 			graph.nodes[from].add(new Node(to, gain));
 		}
 

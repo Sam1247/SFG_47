@@ -4,8 +4,12 @@ import java.util.Collections;
 public class Graph {
 
 	ArrayList<Node>[] nodes;
-	ArrayList<Loop> loops = new ArrayList<>();
 
+
+
+	public Graph getGraph () {
+		return this;
+	}
 
 	private boolean containLoop (Loop loop) {
 		for (Loop lp : loops) {
@@ -23,6 +27,7 @@ public class Graph {
 
 	}
 
+	private ArrayList<Loop> loops = new ArrayList<>();
 	private ArrayList<Path> forwardPaths = new ArrayList<>();
 	private ArrayList<Integer> currentForwardPath = new ArrayList<>();
 	private ArrayList<Integer> currentLoop = new ArrayList<>();
@@ -33,6 +38,7 @@ public class Graph {
 		findFPathes(0);
 		for (Path fp: forwardPaths) {
 			System.out.println(fp.nodes);
+			System.out.println(fp.getGainFrom(nodes));
 		}
 	}
 
