@@ -1,11 +1,9 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class Graph {
 
 	ArrayList<Node>[] nodes;
-	Boolean [] visited;
 	ArrayList<Loop> loops = new ArrayList<>();
 
 
@@ -19,37 +17,42 @@ public class Graph {
 
 	Graph (int size) {
 		nodes = new ArrayList[size];
-		visited = new Boolean[size];
-		Arrays.fill(visited, Boolean.FALSE);
 		for (int i = 0; i < size; ++i) {
 			nodes[i] = new ArrayList<Node>();
 		}
 
 	}
 
-	private ArrayList<ArrayList<Integer>> forwardPathes = new ArrayList<ArrayList<Integer>>();
+	private ArrayList<Path> forwardPaths = new ArrayList<>();
 	private ArrayList<Integer> currentForwardPath = new ArrayList<>();
 	private ArrayList<Integer> currentLoop = new ArrayList<>();
 
 
 
-	ArrayList<ArrayList<Integer>> getforwardPathes () {
+	void printForwardPaths () {
 		findFPathes(0);
-		return forwardPathes;
+		for (Path fp: forwardPaths) {
+			System.out.println(fp.nodes);
+		}
 	}
 
 
 
 	void findFPathes (int s) {
-		if (nodes[s].size() == 0) {
+		if (s == nodes.length-1) {
 			currentForwardPath.add(s);
 			// print
-			System.out.println(currentForwardPath);
+			//System.out.println(currentForwardPath);
+			ArrayList<Integer> nodes = new ArrayList<>();
+			for (int node: currentForwardPath) {
+				nodes.add(node);
+			}
+			Path path = new Path(nodes);
+			forwardPaths.add(path);
 			currentForwardPath.remove(currentForwardPath.size()-1);
 			return;
 		}
 		currentForwardPath.add(s);
-		visited[s] = true;
 		for (Node u: nodes[s]) {
 			if (s < u.to) {
 				findFPathes(u.to);

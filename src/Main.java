@@ -48,7 +48,8 @@ public class Main {
 
 		//test = graph.getforwardPathes();
 		//graph.findLoops(0);
-		graph.printLoops();
+		//graph.printLoops();
+		graph.printForwardPaths();
 
 //		for (int i = 0; i < test.size(); ++i) {
 //			for (int j= 0; j < test.get(i).size(); j++) {
