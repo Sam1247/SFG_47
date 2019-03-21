@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Stack;
 
 public class Graph {
 
@@ -31,6 +32,7 @@ public class Graph {
 	private ArrayList<Path> forwardPaths = new ArrayList<>();
 	private ArrayList<Integer> currentForwardPath = new ArrayList<>();
 	private ArrayList<Integer> currentLoop = new ArrayList<>();
+	private Stack<Integer> subset = new Stack<>();
 
 
 
@@ -101,6 +103,21 @@ public class Graph {
 		}
 	}
 
+	void generateSubs (int k, int n) {
+		if (k == n) {
+			Stack<Integer> temp = (Stack<Integer>) subset.clone();
+			while (temp.size() > 0) {
+				System.out.print(temp.pop());
+				System.out.print(" ");
+			}
+			System.out.println();
+		} else {
+			generateSubs(k+1, n);
+			subset.push(k);
+			generateSubs(k+1, n);
+			subset.pop();
+		}
+	}
 
 
 }
