@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Arrays;
+
 
 public class Graph {
 
@@ -25,14 +29,15 @@ public class Graph {
 		for (int i = 0; i < size; ++i) {
 			nodes[i] = new ArrayList<Node>();
 		}
-
+		Arrays.fill(deltaArray, 0);
 	}
 
 	private ArrayList<Loop> loops = new ArrayList<>();
 	private ArrayList<Path> forwardPaths = new ArrayList<>();
 	private ArrayList<Integer> currentForwardPath = new ArrayList<>();
 	private ArrayList<Integer> currentLoop = new ArrayList<>();
-	private Stack<Integer> subset = new Stack<>();
+	private ArrayList<Integer> subset = new ArrayList<>();
+	private int[] deltaArray = new int[100];
 
 
 
@@ -105,19 +110,47 @@ public class Graph {
 
 	void generateSubs (int k, int n) {
 		if (k == n) {
-			Stack<Integer> temp = (Stack<Integer>) subset.clone();
-			while (temp.size() > 0) {
-				System.out.print(temp.pop());
-				System.out.print(" ");
+			if (subset.size() > 1) {
+				if (!isTouched(subset)) {
+					int sum = 1;
+					for (int loop: subset) {
+						sum *= loops.get(loop).getGainFrom(nodes);
+					}
+
+					deltaArray[subset.size()] += sum;
+				}
 			}
-			System.out.println();
 		} else {
 			generateSubs(k+1, n);
-			subset.push(k);
+			subset.add(k);
 			generateSubs(k+1, n);
-			subset.pop();
+			subset.remove(subset.size()-1);
 		}
 	}
 
+	boolean isTouched (ArrayList<Integer> temp) {
+		ArrayList<Integer> arrayList = new ArrayList<>();
+		for (int index: temp) {
+			for (int node: loops.get(index).nodes) {
+				arrayList.add(node);
+			}
+		}
+		//check for duplicates
+		Set<Integer> set = new HashSet<>(arrayList);
+		if (set.size() != arrayList.size()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	void printDelta () {
+		findLoops(0);
+		//System.out.println(loops.size());
+		generateSubs(0, loops.size());
+		for (int delta: deltaArray) {
+			System.out.println(delta);
+		}
+	}
 
 }

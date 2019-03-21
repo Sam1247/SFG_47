@@ -58,8 +58,9 @@ public class Main {
 //			System.out.println();
 //		}
 //
-		
 
+
+		graph.printDelta();
 
 
 
