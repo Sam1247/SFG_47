@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Stack;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Arrays;
@@ -9,12 +8,6 @@ import java.util.Arrays;
 public class Graph {
 
 	ArrayList<Node>[] nodes;
-
-
-
-	public Graph getGraph () {
-		return this;
-	}
 
 	private boolean containLoop (Loop loop) {
 		for (Loop lp : loops) {
@@ -146,11 +139,27 @@ public class Graph {
 
 	void printDelta () {
 		findLoops(0);
-		//System.out.println(loops.size());
 		generateSubs(0, loops.size());
 		for (int delta: deltaArray) {
 			System.out.println(delta);
 		}
+	}
+
+	int getBigDelta () {
+		findLoops(0);
+		generateSubs(0, loops.size());
+		int sum = 0;
+		for (int i = 2; i < 100; i++) {
+			if (i%2 == 0) {
+				sum += deltaArray[i];
+			} else {
+				sum -= deltaArray[i];
+			}
+		}
+		for (Loop loop: loops) {
+			sum -= loop.getGainFrom(nodes);
+		}
+		return sum;
 	}
 
 }
