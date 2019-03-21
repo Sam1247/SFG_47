@@ -97,7 +97,7 @@ public class Graph {
 		findLoops(0);
 		for (Loop loop: loops) {
 			System.out.println(loop.nodes);
-			//System.out.println(loop.hashValue);
+			System.out.println(loop.getGainFrom(nodes));
 		}
 	}
 

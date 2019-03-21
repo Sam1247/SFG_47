@@ -26,11 +26,23 @@ public class Loop {
 	}
 
 	int getGainFrom (ArrayList<Node>[] graphNodes) {
-		int gain = 0;
+		int gain = 1;
 		for (int i = 0; i < nodes.size()-1; i++) {
-			gain += graphNodes[nodes.get(i)].get(nodes.get(i+1)).gain;
+			for (Node node: graphNodes[nodes.get(i)]) {
+				if (node.to == nodes.get(i+1)) {
+					gain *= node.gain;
+					break;
+				}
+			}
 		}
-		gain += graphNodes[nodes.get(nodes.size()-1)].get(nodes.get(0)).gain;
+
+		for (Node node: graphNodes[nodes.get(nodes.size()-1)]) {
+			if (node.to == nodes.get(0)) {
+				gain *= node.gain;
+				break;
+			}
+		}
+
 		return gain;
 	}
 

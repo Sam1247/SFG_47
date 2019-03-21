@@ -8,7 +8,7 @@ public class Path {
 	int getGainFrom (ArrayList<Node>[] graphNodes) {
 		int gain = 1;
 		for (int i = 0; i < nodes.size()-1; i++) {
-			for (Node node: graphNodes[i]) {
+			for (Node node: graphNodes[nodes.get(i)]) {
 				if (node.to == nodes.get(i+1)) {
 					gain *= node.gain;
 					break;
