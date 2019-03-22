@@ -66,9 +66,11 @@ public class Main {
 //		graph.printLoops();
 		graph.printForwardPaths();
 		System.out.println(graph.getBigDelta());
-
-
+//
+//
 		System.out.println(graph.getNunumerator());
+
+		System.out.println(graph.getResult());
 
 	}
 }

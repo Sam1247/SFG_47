@@ -30,15 +30,10 @@ public class Graph {
 	private ArrayList<Integer> subset = new ArrayList<>();
 	private int[] deltaArrayBeforeElimination = new int[100];
 	private ArrayList<Loop> loopsAfterElimination = new ArrayList<>();
-	private ArrayList<Integer> subsetAfterElimination = new ArrayList<>();
 	private int[] deltaArrayAfterElimination = new int[100];
-
 	private ArrayList<Path> forwardPaths = new ArrayList<>();
 	private ArrayList<Integer> currentForwardPath = new ArrayList<>();
 	private ArrayList<Integer> currentLoop = new ArrayList<>();
-
-
-
 
 	void printForwardPaths () {
 		findFPathes(0);
@@ -47,8 +42,6 @@ public class Graph {
 			System.out.println(fp.getGainFrom(nodes));
 		}
 	}
-
-
 
 	void findFPathes (int s) {
 		if (s == nodes.length-1) {
@@ -72,7 +65,6 @@ public class Graph {
 		}
 		currentForwardPath.remove(currentForwardPath.size()-1);
 	}
-
 
 	void findLoops (int s) {
 		if (currentLoop.contains(s)) {
@@ -162,22 +154,15 @@ public class Graph {
 	}
 
 	int getNunumerator () {
-
 		int sum = 0;
 
 		for (Path path: forwardPaths) {
-
 			int temp = path.getGainFrom(nodes);
-
 			int p = getSmallDelta(path);
-
 			temp *= p;
-
 			sum += temp;
 		}
-
 		return sum;
-
 	}
 
 	int getSmallDelta (Path path) {
@@ -197,7 +182,6 @@ public class Graph {
 			}
 		}
 
-
 		subset.clear();
 		generateSubs(0, loopsAfterElimination.size(), deltaArrayAfterElimination, loopsAfterElimination);
 		int sum = 0;
@@ -212,9 +196,11 @@ public class Graph {
 			sum -= loop.getGainFrom(nodes);
 		}
 		return 1+sum;
-
-
-
 	}
 
+	Double getResult () {
+		Double numerator = Double.valueOf(getNunumerator());
+		Double denumerator = Double.valueOf(getBigDelta());
+		return Double.valueOf(numerator/denumerator);
+	}
 }
