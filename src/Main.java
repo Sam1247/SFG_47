@@ -64,12 +64,15 @@ public class Main {
 		//System.out.println(graph.getBigDelta());
 		//System.out.println(graph.getNunumerator());
 //		graph.printLoops();
+		System.out.println("Forward paths:");
 		graph.printForwardPaths();
+		System.out.println("All Loops:");
+		graph.printLoops();
+		System.out.print("Big Delta = ");
 		System.out.println(graph.getBigDelta());
-//
-//
+		System.out.print("Nunumerator: ");
 		System.out.println(graph.getNunumerator());
-
+		System.out.println("Result: ");
 		System.out.println(graph.getResult());
 
 	}

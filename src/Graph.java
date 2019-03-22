@@ -4,7 +4,6 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Arrays;
 
-
 public class Graph {
 
 	ArrayList<Node>[] nodes;
@@ -39,6 +38,7 @@ public class Graph {
 		findFPathes(0);
 		for (Path fp: forwardPaths) {
 			System.out.println(fp.nodes);
+			System.out.print("gain: ");
 			System.out.println(fp.getGainFrom(nodes));
 		}
 	}
@@ -65,6 +65,7 @@ public class Graph {
 		}
 		currentForwardPath.remove(currentForwardPath.size()-1);
 	}
+
 
 	void findLoops (int s) {
 		if (currentLoop.contains(s)) {
@@ -203,4 +204,5 @@ public class Graph {
 		Double denumerator = Double.valueOf(getBigDelta());
 		return Double.valueOf(numerator/denumerator);
 	}
+
 }
