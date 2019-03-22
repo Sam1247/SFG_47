@@ -61,10 +61,14 @@ public class Main {
 
 
 		//graph.printDelta();
+		//System.out.println(graph.getBigDelta());
+		//System.out.println(graph.getNunumerator());
+//		graph.printLoops();
+		graph.printForwardPaths();
 		System.out.println(graph.getBigDelta());
 
 
-
+		System.out.println(graph.getNunumerator());
 
 	}
 }
