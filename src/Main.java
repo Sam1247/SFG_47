@@ -26,8 +26,8 @@ public class Main {
 		graph.printForwardPaths();
 		System.out.println("All Loops:");
 		graph.printLoops();
-		System.out.print("Big Delta = ");
 		System.out.println(graph.getBigDelta());
+		System.out.println("Big Delta");
 		System.out.print("Nunumerator: ");
 		System.out.println(graph.getNunumerator());
 		System.out.println("Result: ");

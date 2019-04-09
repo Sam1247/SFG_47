@@ -1,8 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Arrays;
+import java.util.*;
 
 public class Graph {
 
@@ -33,6 +29,9 @@ public class Graph {
 	private ArrayList<Path> forwardPaths = new ArrayList<>();
 	private ArrayList<Integer> currentForwardPath = new ArrayList<>();
 	private ArrayList<Integer> currentLoop = new ArrayList<>();
+	private boolean didFinshPrintingNoneTouchingLoops = false;
+	private ArrayList<ArrayList<Integer>>[] noneTouchingLoops = new ArrayList[100];
+
 
 	void printForwardPaths () {
 		findFPathes(0);
@@ -104,6 +103,14 @@ public class Graph {
 		if (k == n) {
 			if (subset.size() > 1) {
 				if (!isTouched(subset, loops)) {
+					//test printing loops
+					if (!didFinshPrintingNoneTouchingLoops) {
+						System.out.print("non_touched #");
+						System.out.println(subset.size());
+						for (int loop : subset) {
+							System.out.println(loops.get(loop).nodes);
+						}
+					}
 					int sum = 1;
 					for (int loop: subset) {
 						sum *= loops.get(loop).getGainFrom(nodes);
@@ -138,8 +145,10 @@ public class Graph {
 
 	int getBigDelta () {
 		Arrays.fill(deltaArrayBeforeElimination, 0);
-		findLoops(0);
+		// modifying 1
+		//findLoops(0);
 		generateSubs(0, loops.size(), deltaArrayBeforeElimination, loops);
+		didFinshPrintingNoneTouchingLoops = true;
 		int sum = 0;
 		for (int i = 2; i < 100; i++) {
 			if (i%2 == 0) {
@@ -204,5 +213,17 @@ public class Graph {
 		Double denumerator = Double.valueOf(getBigDelta());
 		return Double.valueOf(numerator/denumerator);
 	}
+
+//	void printNoneTouchingLoops () {
+//		for (int  i = 2; i < 100; i++) {
+//			if (noneTouchingLoops[i] != null) {
+//				System.out.print("NoneTouched ");
+//				System.out.println(i);
+//				for (Object arrayList : noneTouchingLoops[i]) {
+//					System.out.println(arrayList);
+//				}
+//			}
+//		}
+//	}
 
 }
